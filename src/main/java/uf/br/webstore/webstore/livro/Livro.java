@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
@@ -52,12 +51,12 @@ public class Livro {
     LocalDateTime dataDePublicacao;
 
     @NotNull
-    @ManyToOne //muitos livros para uma categoria
-    Unidade categoria;
+    @ManyToOne //muitos livros para uma unidade
+    Unidade unidade;
     
     @NotNull
-    @ManyToOne // muitos autores podem estar para 1 livro quanto muitos livros para muitos autores
-    Pessoa autor;
+    @ManyToOne // muitos pessoaes podem estar para 1 livro quanto muitos livros para muitos pessoaes
+    Pessoa pessoa;
 
 
     @Deprecated
@@ -66,7 +65,7 @@ public class Livro {
 
     public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
             @NotBlank String isbn, @NotNull @Min(100) int numeroDePaginas, @NotNull @Min(20) double preco,
-            @Future LocalDateTime dataDePublicacao, @NotNull Unidade categoria, @NotNull Pessoa autor) {
+            @Future LocalDateTime dataDePublicacao, @NotNull Unidade unidade, @NotNull Pessoa pessoa) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;
@@ -74,8 +73,8 @@ public class Livro {
         this.numeroDePaginas = numeroDePaginas;
         this.preco = preco;
         this.dataDePublicacao = dataDePublicacao;
-        this.categoria = categoria;
-        this.autor = autor;
+        this.unidade = unidade;
+        this.pessoa = pessoa;
     }
 
 

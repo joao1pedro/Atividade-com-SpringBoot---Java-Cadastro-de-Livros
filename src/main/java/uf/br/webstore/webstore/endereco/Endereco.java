@@ -4,9 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.NumberFormat;
+
+import uf.br.webstore.webstore.pessoa.Pessoa;
 
 @Entity
 public class Endereco {
@@ -34,13 +38,18 @@ public class Endereco {
     @NotBlank
     private String cep;
 
+    @NotNull
+    @ManyToOne
+    Pessoa pessoaCpf;
+
     @Deprecated
     public Endereco(){
 
     }
 
     public Endereco(@NotBlank(message = "Endereço inválido.") String endereco, @NotBlank String estado,
-            @NotBlank String cidade, @NotBlank String bairro, int numero, String complemento, @NotBlank String cep) {
+            @NotBlank String cidade, @NotBlank String bairro, int numero, String complemento, @NotBlank String cep,
+            @NotBlank Pessoa pessoaCpf) {
         this.endereco = endereco;
         this.estado = estado;
         this.cidade = cidade;
@@ -48,6 +57,7 @@ public class Endereco {
         this.numero = numero;
         this.complemento = complemento;
         this.cep = cep;
+        this.pessoaCpf = pessoaCpf;
     }
 
     

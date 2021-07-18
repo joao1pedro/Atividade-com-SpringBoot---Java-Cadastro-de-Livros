@@ -1,8 +1,11 @@
 package uf.br.webstore.webstore.pessoa;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.NumberFormat;
@@ -27,17 +30,25 @@ public class CadastraPessoaRequest {
     @NotBlank
     @Email //Permite só string no layout de e-mail
     private String email;
+
+    @PastOrPresent 
+    LocalDateTime dataCriacao = LocalDateTime.now();
     
+    /*
+    @NotNull
+    long enderecoId;
 
     public CadastraPessoaRequest(@NotBlank(message = "Nome em formato inválido") String nome, @NotBlank @CPF String cpf,
-            int idade, @NotNull char sexo, @NotNull char grupoRisco, @NotBlank @Email String email) {
+            int idade, @NotNull char sexo, @NotNull char grupoRisco, @NotBlank @Email String email,
+            @NotNull long enderecoId) {
         this.nome = nome;
         this.cpf = cpf;
         this.idade = idade;
         this.sexo = sexo;
         this.grupoRisco = grupoRisco;
         this.email = email;
-    }
+        this.enderecoId = enderecoId;
+    }*/
 
     public String getNome() {
         return nome;
@@ -87,9 +98,32 @@ public class CadastraPessoaRequest {
         this.sexo = sexo;
     }
 
-    public Pessoa toModel(){
-        return new Pessoa(this.nome, this.cpf, this.idade, this.sexo, this.grupoRisco, this.email);
+    /*
+    public long getEnderecoId() {
+        return enderecoId;
     }
 
+    public void setEnderecoId(long enderecoId) {
+        this.enderecoId = enderecoId;
+    }*/
+
+    /*
+    public Pessoa toModel(Endereco endereco){
+        return new Pessoa(this.nome, this.cpf, this.idade, this.sexo,
+        this.grupoRisco, this.email, endereco);
+    }*/
+
+    public LocalDateTime getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Pessoa toModel(){
+        return new Pessoa(this.nome, this.cpf, this.idade, this.sexo,
+        this.grupoRisco, this.email, this.dataCriacao);
+    }
     
 }
