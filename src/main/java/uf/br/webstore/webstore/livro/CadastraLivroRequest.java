@@ -9,8 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import uf.br.webstore.webstore.autor.Autor;
-import uf.br.webstore.webstore.categoria.Categoria;
+import uf.br.webstore.webstore.pessoa.Pessoa;
+import uf.br.webstore.webstore.unidadeSaude.Unidade;
 
 
 public class CadastraLivroRequest {
@@ -112,7 +112,7 @@ public class CadastraLivroRequest {
                 + ", resumo=" + resumo + ", sumario=" + sumario + ", titulo=" + titulo + "]";
     }
 
-    public Livro toModel(Categoria categoria, Autor autor){
+    public Livro toModel(Unidade categoria, Pessoa autor){
         return new Livro(this.titulo, this.resumo, this.sumario, this.isbn, this.numeroDePaginas, this.preco, this.dataDePublicacao, categoria, autor);
     }
 

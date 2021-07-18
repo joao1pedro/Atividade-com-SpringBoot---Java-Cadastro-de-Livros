@@ -1,6 +1,5 @@
-package uf.br.webstore.webstore.categoria;
+package uf.br.webstore.webstore.unidadeSaude;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -11,33 +10,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CategoriaController {
+public class UnidadeController {
     
     @Autowired
     //EntityManager entityManager;
-    CategoriaRepository categoriaRepository;
+    UnidadeRepository unidadeRepository;
 
-    @PostMapping(value = "/categoria")
+    @PostMapping(value = "/unidade")
     @Transactional
     //ResponseEntity informa o erro a qual deve retornar
-    public ResponseEntity<Object> addCategoria(@RequestBody @Valid CadastraCategoriaRequest cadastraCategoriaRequest){
+    public ResponseEntity<Object> addUnidade(@RequestBody @Valid CadastraUnidadeRequest cadastraUnidadeRequest){
       
-        boolean existsCategoria = categoriaRepository.existsByNome(cadastraCategoriaRequest.getNome());
+        boolean existsUnidade = unidadeRepository.existsByNome(cadastraUnidadeRequest.getNome());
 
-        if(existsCategoria){
+        if(existsUnidade){
             return ResponseEntity.badRequest().build();
             //return "Erro ao inserir usuário";
         }
    
 
-        Categoria categoria = cadastraCategoriaRequest.toModel();
+        Unidade unidade = cadastraUnidadeRequest.toModel();
         
         // Salvando os dados no banco de dados
-        //entityManager.persist(categoria);
-        categoriaRepository.save(categoria);
+        //entityManager.persist(unidade);
+        unidadeRepository.save(unidade);
   
 
-        return  ResponseEntity.ok("Categoria Cadastrada com Sucesso.");
+        return  ResponseEntity.ok("Unidade Cadastrada com Sucesso.");
     }
 
    

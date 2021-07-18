@@ -15,8 +15,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import uf.br.webstore.webstore.autor.Autor;
-import uf.br.webstore.webstore.categoria.Categoria;
+import uf.br.webstore.webstore.pessoa.Pessoa;
+import uf.br.webstore.webstore.unidadeSaude.Unidade;
 
 @Entity
 public class Livro {
@@ -53,11 +53,11 @@ public class Livro {
 
     @NotNull
     @ManyToOne //muitos livros para uma categoria
-    Categoria categoria;
+    Unidade categoria;
     
     @NotNull
     @ManyToOne // muitos autores podem estar para 1 livro quanto muitos livros para muitos autores
-    Autor autor;
+    Pessoa autor;
 
 
     @Deprecated
@@ -66,7 +66,7 @@ public class Livro {
 
     public Livro(@NotBlank String titulo, @NotBlank @Size(max = 500) String resumo, @NotBlank String sumario,
             @NotBlank String isbn, @NotNull @Min(100) int numeroDePaginas, @NotNull @Min(20) double preco,
-            @Future LocalDateTime dataDePublicacao, @NotNull Categoria categoria, @NotNull Autor autor) {
+            @Future LocalDateTime dataDePublicacao, @NotNull Unidade categoria, @NotNull Pessoa autor) {
         this.titulo = titulo;
         this.resumo = resumo;
         this.sumario = sumario;

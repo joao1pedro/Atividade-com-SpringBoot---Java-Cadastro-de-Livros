@@ -4,7 +4,6 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import uf.br.webstore.webstore.autor.Autor;
-import uf.br.webstore.webstore.autor.AutorRepository;
-import uf.br.webstore.webstore.categoria.Categoria;
-import uf.br.webstore.webstore.categoria.CategoriaRepository;
+import uf.br.webstore.webstore.pessoa.Pessoa;
+import uf.br.webstore.webstore.pessoa.PessoaRepository;
+import uf.br.webstore.webstore.unidadeSaude.Unidade;
+import uf.br.webstore.webstore.unidadeSaude.UnidadeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +27,9 @@ public class LivroController{
     // @Autowired
     // AutorRepository autorRepository;
     @Autowired
-    CategoriaRepository categoriaRepository;
+    UnidadeRepository categoriaRepository;
     @Autowired
-    AutorRepository autorRepository;
+    PessoaRepository autorRepository;
 
     @Autowired
     LivroRepository livroRepository;
@@ -42,8 +40,8 @@ public class LivroController{
         
         System.out.println(cadastraLivroRequest.toString());
         
-        Optional<Categoria>  categoriaOpt = categoriaRepository.findByNome(cadastraLivroRequest.getNomeCategoria());
-        Optional<Autor>  autorOpt = autorRepository.findByEmail(cadastraLivroRequest.getAutorEmail());
+        Optional<Unidade>  categoriaOpt = categoriaRepository.findByNome(cadastraLivroRequest.getNomeCategoria());
+        Optional<Pessoa>  autorOpt = autorRepository.findByEmail(cadastraLivroRequest.getAutorEmail());
         
         if(categoriaOpt.isEmpty()){
             return ResponseEntity.badRequest().body("Categoria inválida.");

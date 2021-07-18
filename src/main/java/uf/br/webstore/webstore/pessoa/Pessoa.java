@@ -1,4 +1,4 @@
-package uf.br.webstore.webstore.autor;
+package uf.br.webstore.webstore.pessoa;
 
 import java.time.LocalDateTime;
 
@@ -8,11 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.NumberFormat;
 
 @Entity
-public class Autor {
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,28 +23,41 @@ public class Autor {
 
     @NotBlank(message = "Nome em formato inválido") //Permite que nao seja vazias
     private String nome;
+
+    @NotBlank
+    @CPF
+    private String cpf;
+
+    @NumberFormat
+    private int idade;
+
+    @NotNull
+    private char sexo;
+
+    @NotNull
+    private char grupoRisco;
+
     
     @NotBlank
     @Email //Permite só string no layout de e-mail
     private String email;
-    
-    @NotBlank
-    @Size(max = 400) // o tamanho máximo de caracteres
-    private String descricao;
 
     @PastOrPresent // Data presente ou futuro, nao pode ser anterior
     LocalDateTime dataCriacao = LocalDateTime.now(); // pega o local exato que o Autor for criado
 
     @Deprecated
-    public Autor(){
+    public Pessoa(){
 
     }
 
-    public Autor(@NotBlank(message = "Nome em formato inválido") String nome, @NotBlank @Email String email, @NotBlank @Size(max = 400) String descricao) {
+    public Pessoa(@NotBlank(message = "Nome em formato inválido") String nome, @NotBlank @CPF String cpf, int idade,
+            @NotNull char sexo, @NotNull char grupoRisco, @NotBlank @Email String email) {
         this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+        this.sexo = sexo;
+        this.grupoRisco = grupoRisco;
         this.email = email;
-        this.descricao = descricao;
-        
     }
 
 

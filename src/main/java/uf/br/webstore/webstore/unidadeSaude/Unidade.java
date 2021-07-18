@@ -1,4 +1,4 @@
-package uf.br.webstore.webstore.categoria;
+package uf.br.webstore.webstore.unidadeSaude;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 
 
 @Entity
-public class Categoria {
+public class Unidade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +19,10 @@ public class Categoria {
     private String nome;
 
     @Deprecated
-    public Categoria(){
+    public Unidade(){
     }
 
-    public Categoria(@NotBlank String nome) {
+    public Unidade(@NotBlank String nome) {
         this.nome = nome;
     }
     
